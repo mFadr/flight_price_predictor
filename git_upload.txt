@@ -1,0 +1,50 @@
+
+
+
+# new repository
+cd C:\path\to\agent_exams_simulator
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/mFadr/3Dmodel.git
+git pull origin main --allow-unrelated-histories   # only if the GitHub repo isn't empty
+git push -u origin main
+
+
+
+
+
+$root = "C:\Users\mFadrhons\Documents\GITHUB_projects"
+Get-ChildItem $root -Directory | ForEach-Object {
+    if (Test-Path "$($_.FullName)\.git") {
+        Write-Host "`n=== $($_.Name) ===" -ForegroundColor Cyan
+        Push-Location $_.FullName
+        git add .
+        if (git status --porcelain) {
+            git commit -m "Update $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+        }
+        git push
+        Pop-Location
+    }
+}
+
+
+
+
+
+
+
+$root = "E:\C-project\3Dmodel"
+Get-ChildItem $root -Directory | ForEach-Object {
+    if (Test-Path "$($_.FullName)\.git") {
+        Write-Host "`n=== $($_.Name) ===" -ForegroundColor Cyan
+        Push-Location $_.FullName
+        git add .
+        if (git status --porcelain) {
+            git commit -m "Update $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+        }
+        git push
+        Pop-Location
+    }
+}

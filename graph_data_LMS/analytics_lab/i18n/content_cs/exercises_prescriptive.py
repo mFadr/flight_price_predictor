@@ -1,0 +1,128 @@
+"""Czech text for the Prescriptive Analytics exercises (code, solutions and check logic are unchanged)."""
+
+EXERCISES = {
+    "ex_py_ps1_product_mix": {
+        "title": "Optimální týdenní výrobní mix",
+        "topic": "Lineární programování",
+        "business_question": "Jaký týdenní mix sad maximalizuje příspěvek na úhradu v rámci kapacity zdrojů, stropů poptávky a závazků?",
+        "requirements": [
+            "Rozhodovací proměnné: týdenní počet kusů každého produktu (spojité hodnoty stačí).",
+            "Každý produkt mezi min_weekly_commitment a max_weekly_demand; hodiny zdrojů <= hours_available_per_week.",
+            "`plan`: Series kusů s indexem podle názvu produktu. `max_profit`: optimální týdenní zisk.",
+            "`binding`: seznam názvů zdrojů, jejichž kapacita je plně využita (slack < 1e-6).",
+        ],
+        "expected_output": "Series, hodnota float a seznam.",
+        "explanation": "linprog minimalizuje, proto předejte záporný vektor zisku a optimum znegujte. Zdroje s nulovou rezervou jsou úzká hrdla: jen ony omezují zisk.",
+        "hints": [
+            "c = -profit_per_unit (maximalizace minimalizací záporné hodnoty).",
+            "bounds = list(zip(min_weekly_commitment, max_weekly_demand)).",
+            "res.slack obsahuje nevyužité hodiny pro každý zdroj (řádky A_ub).",
+        ],
+        "checks": [
+            {"name": "optimální zisk", "msgs": ['f\'Váš zisk {need("max_profit")} se liší od optima. Znegovali jste účelovou funkci?\'']},
+            {"name": "plán je přípustný", "msgs": ["'plan musí mít jako index všechny názvy produktů.'", "'plan porušuje strop poptávky nebo závazek.'", "'plan překračuje kapacitu zdroje.'"]},
+            {"name": "plán dosahuje uvedeného zisku", "msgs": ["'max_profit se nerovná zisku vašeho plánu.'"]},
+            {"name": "úzká hrdla určena", "msgs": ['f\'Vázající zdroje mají být {sorted(ref["binding"])}.\'']},
+        ],
+        "visible_tests": ["Zisk se rovná optimu", "Plán splňuje všechna omezení", "Zdroje úzkých hrdel určeny"],
+        "rubric": [("Správná formulace", 40), ("Optimální a přípustné", 40), ("Interpretace úzkých hrdel", 20)],
+    },
+    "ex_py_ps2_assignment": {
+        "title": "Přiřaďte techniky k zakázkám",
+        "topic": "Přiřazovací úloha",
+        "business_question": "Přiřaďte šest techniků k šesti zakázkám tak, aby celkové minuty cesty a práce byly minimální.",
+        "requirements": [
+            "Použijte zadanou matici nákladů (řádky = technici, sloupce = zakázky).",
+            "`assignment`: slovník technik -> zakázka, každá zakázka použita právě jednou.",
+            "`total_cost`: celkové minuty vašeho přiřazení (musí být minimální).",
+        ],
+        "expected_output": "Slovník se 6 položkami a celé číslo.",
+        "explanation": "Hladový přístup (každý technik si vezme nejlevnější zbývající zakázku) obvykle mine optimum; maďarská metoda zaručí minimální součet.",
+        "hints": [
+            "linear_sum_assignment(cost) vrátí indexy řádků a sloupců.",
+            "Součet = cost[rows, cols].sum().",
+        ],
+        "checks": [
+            {"name": "platné přiřazení jedna k jedné", "msgs": ["'Každý technik potřebuje právě jednu zakázku.'", "'Každá zakázka musí být přiřazena právě jednou.'"]},
+            {"name": "součet odpovídá přiřazení", "msgs": ["f'total_cost se má rovnat nákladům vašeho přiřazení ({t}).'"]},
+            {"name": "přiřazení je optimální", "msgs": ['f\'Váš součet {need("total_cost")} není minimální. Hladové pravidlo optimum často mine.\'']},
+        ],
+        "visible_tests": ["Přiřazení jedna k jedné", "Součet odpovídá přiřazení", "Součet je minimální"],
+        "rubric": [("Platné přiřazení", 40), ("Optimální", 60)],
+    },
+    "ex_py_ps3_inventory": {
+        "title": "Objednací politika pro každé SKU",
+        "topic": "EOQ a pojistná zásoba",
+        "business_question": "Nastavte objednací množství a body znovuobjednání pro 95% úroveň služeb v cyklu.",
+        "requirements": [
+            "Použijte units_demanded z roku 2024: pro každé SKU denní průměr `d` a směrodatnou odchylku `sd` (výchozí ddof=1 v pandas).",
+            "Dodací lhůta L = contract_lead_time_days dodavatele. z = scipy.stats.norm.ppf(0.95).",
+            "eoq = sqrt(2 * (d * 365) * order_cost / (unit_cost * annual_holding_cost_rate)).",
+            "safety_stock = z * sd * sqrt(L); reorder_point = d * L + safety_stock.",
+            "`policy`: DataFrame se sloupci sku, eoq, safety_stock, reorder_point (jeden řádek na SKU).",
+        ],
+        "expected_output": "20 řádků x 4 sloupce.",
+        "explanation": "Pojistná zásoba roste s variabilitou poptávky a odmocninou dodací lhůty; SKU od pomalých dodavatelů potřebují pro stejnou úroveň služeb větší rezervy.",
+        "hints": [
+            "Data filtrujte pomocí dd['date'].dt.year == 2024.",
+            "Připojte k inventory dodavatele, abyste získali dodací lhůty.",
+            "Pozor na jednotky: roční poptávka = denní průměr * 365; náklady na držení kusu za rok = unit_cost * sazba.",
+        ],
+        "checks": [
+            {"name": "struktura", "msgs": ["f'Očekáváno 20 SKU, máte {len(p)}.'", "f'Chybí sloupec {c}.'"]},
+            {"name": "EOQ"},
+            {"name": "pojistná zásoba a bod znovuobjednání"},
+        ],
+        "visible_tests": ["20 SKU s požadovanými sloupci", "EOQ, pojistná zásoba a bod znovuobjednání odpovídají referenci"],
+        "rubric": [("Správné statistiky poptávky", 30), ("Správné EOQ", 30), ("Správná pojistná zásoba / ROP", 40)],
+    },
+    "ex_py_ps4_monte_carlo": {
+        "title": "Simulace rizika akce",
+        "topic": "Monte Carlo",
+        "business_question": "Jaký je očekávaný zisk akce a jaké riziko ztráty?",
+        "requirements": [
+            "Nasimulujte alespoň 100 000 scénářů: units ~ Normal(1000, 250) oříznuté na 0; jednotková marže ~ Uniform(4, 9); fixní náklady 5 000 EUR.",
+            "profit = units * margin - 5000.",
+            "`expected_profit` (průměr), `prob_loss` (podíl scénářů se ziskem < 0), `p5` (5. percentil).",
+        ],
+        "expected_output": "Tři hodnoty float (libovolné semínko; platí tolerance Monte Carlo).",
+        "explanation": "Očekávaný zisk je asi 1 500 EUR, ale zhruba čtvrtina scénářů prodělává a 5. percentil je ztráta přibližně 1 700 EUR. Rozhodnutí závisí na ochotě riskovat.",
+        "hints": [
+            "Losujte pole o velikosti n - smyčky nejsou potřeba.",
+            "rng.uniform(4, 9, n) pro marže.",
+            "np.percentile(profit, 5).",
+        ],
+        "checks": [
+            {"name": "očekávaný zisk", "msgs": ['f\'Očekávaný zisk {v:,.0f} je mimo toleranci Monte Carlo kolem ~{ref["expected_profit"]:,.0f}. Zkontrolujte rozdělení a fixní náklady.\'']},
+            {"name": "pravděpodobnost ztráty", "msgs": ["'prob_loss má být zlomek mezi 0 a 1.'", 'f\'P(ztráta) {v:.3f} se liší od ~{ref["prob_loss"]:.3f}.\'']},
+            {"name": "5. percentil", "msgs": ['f\'5. percentil {v:,.0f} se liší od ~{ref["p5"]:,.0f}.\'']},
+        ],
+        "visible_tests": ["Očekávaný zisk, P(ztráta) a 5. percentil v toleranci Monte Carlo"],
+        "rubric": [("Správná rozdělení", 40), ("Správné míry rizika", 40), ("Vektorizované, reprodukovatelné", 20)],
+    },
+    "ex_py_ps5_budget": {
+        "title": "Alokace marketingového rozpočtu s rizikovou politikou",
+        "topic": "LP s citlivostní analýzou",
+        "business_question": "Rozdělte 400 000 EUR mezi kanály tak, aby byl očekávaný zisk maximální při limitu rizika portfolia.",
+        "requirements": [
+            "Maximalizujte sum(expected_margin_per_dollar * spend). Výdaje na kanál mezi min_spend a max_spend.",
+            "Celkové výdaje <= 400 000. Průměrné risk_score vážené výdaji <= 0.35 (linearizace: sum((risk - 0.35) * spend) <= 0).",
+            "`allocation`: Series výdajů s indexem podle kanálu. `expected_profit`: optimální hodnota účelové funkce.",
+            "`budget_shadow_price`: zisk navíc za každé euro rozpočtu navíc (nula nebo kladné).",
+        ],
+        "expected_output": "Series a dvě hodnoty float.",
+        "explanation": "Rizikové omezení je vázající, takže optimalizátor nedokáže celý rozpočet využít ziskově: stínová cena rozpočtu je 0. Klíčovým poznatkem je říct marketingové ředitelce: „Rozpočet navíc nemá při současné rizikové politice žádnou hodnotu; zisk přidá uvolnění politiky“ - samotný výstup řešiče by to skryl.",
+        "hints": [
+            "Dva řádky nerovností: celkové výdaje a výdaje vážené rizikem.",
+            "Pro maximalizaci marže znegujte; duální hodnotu rozpočtového řádku znegujte, abyste dostali kladnou stínovou cenu.",
+            "Případně úlohu vyřešte znovu s rozpočtem + 1 000 a změnu zisku vydělte 1 000.",
+        ],
+        "checks": [
+            {"name": "optimální zisk", "msgs": ["'Očekávaný zisk není optimální. Zkontrolujte obě omezení a meze.'"]},
+            {"name": "alokace je přípustná", "msgs": ["'allocation musí mít index podle názvu kanálu.'", "'Celkové výdaje překračují rozpočet.'", "'Některý kanál je mimo své min/max výdaje.'", "'Průměrné riziko přesahuje 0.35.'"]},
+            {"name": "stínová cena rozpočtu", "msgs": ['f\'Stínová cena má být asi {ref["budget_shadow_price"]:.3f} zisku na euro navíc. Pozor na znaménko při minimalizaci -zisku a ověřte, zda je rozpočet skutečně celý využit.\'']},
+        ],
+        "visible_tests": ["Zisk je optimální", "Alokace dodržuje rozpočet, meze a rizikovou politiku", "Stínová cena rozpočtu je správná"],
+        "rubric": [("Správná formulace včetně linearizace rizika", 40), ("Optimální a přípustné", 30), ("Citlivost (stínová cena)", 30)],
+    },
+}

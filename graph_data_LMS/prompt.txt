@@ -1,0 +1,647 @@
+# MASTER PROMPT: Build an Advanced Local Data Analytics Learning & Testing Lab in Python
+
+## 1. Your Role and Mission
+
+Act as a senior Python software engineer, data scientist, analytics consultant, instructional designer, assessment specialist, and UX/UI designer.
+
+Design and implement a complete, production-quality **Data Analytics Learning & Testing Lab** that runs locally on a computer through a web browser.
+
+The application must function as an interactive learning platform in which users can study data analytics, practise real analytical tasks, write and execute code, receive immediate feedback, assess their progress, and demonstrate measurable improvements in their analytical competence.
+
+Do not create a static educational website or a collection of tutorials. Build a practical learning environment where users learn by doing.
+
+The application must be beginner-friendly while supporting advanced learners who want to develop professional-level analytics skills.
+
+**Primary objective:** By completing the curriculum, users should be significantly more competent at solving real business problems using data, choosing appropriate analytical methods, writing correct code, interpreting results, and communicating insights to stakeholders.
+
+## 2. Technology Stack and Local Execution
+
+Use the following technology stack unless a genuine technical limitation requires a justified alternative:
+
+- **Programming language:** Python 3.11 or newer.
+- **Application framework:** Streamlit.
+- **Data manipulation:** pandas and NumPy.
+- **SQL execution:** DuckDB and/or SQLite.
+- **Statistical analysis:** SciPy and statsmodels.
+- **Machine learning:** scikit-learn.
+- **Data visualization:** Matplotlib and Plotly.
+- **Excel file handling:** openpyxl and pandas.
+- **User progress and results:** SQLite.
+- **R support:** Optional local R execution through an installed R interpreter.
+- **Testing:** pytest.
+- **Configuration:** requirements.txt and a documented setup procedure.
+
+The application must run on the user's computer, accessible through a local address such as `http://localhost:8501`.
+
+Avoid mandatory cloud services, paid APIs, subscriptions, authentication providers, or external databases. Core lessons, datasets, quizzes, progress tracking, and Python/SQL exercises must work offline after installation.
+
+Check installed dependencies and available software capabilities at startup. If R is not installed, display clear installation instructions and let users continue with the remaining modules.
+
+Do not claim to execute Power BI, Tableau, Excel, or Looker Studio natively inside the application. Instead, provide simulated exercises, tool-specific practical assignments, downloadable datasets, solution guides, and instructions for completing selected tasks in the actual software.
+
+## 3. Application Architecture and Navigation
+
+Create an attractive, professional application with a persistent navigation menu.
+
+Include these main sections:
+
+1. Dashboard
+2. Learning Path
+3. Descriptive Analytics
+4. Diagnostic Analytics
+5. Predictive Analytics
+6. Prescriptive Analytics
+7. Data Visualization
+8. Practice & Coding Lab
+9. Assessment Center
+10. Capstone Projects
+11. My Progress
+12. Settings and Help
+
+The five analytics modules are the core learning tracks. The other sections support navigation, practice, testing, and competency development.
+
+The dashboard should display:
+
+- Overall completion percentage.
+- Competency scores by module.
+- Lessons completed.
+- Quiz accuracy.
+- Coding exercise pass rate.
+- Learning streak or recent activity, where appropriate.
+- Strongest and weakest competencies.
+- Recommended next lesson based on performance.
+- Outstanding assignments and revision recommendations.
+
+Use a consistent design system, clear typography, accessible colors, informative charts, intuitive controls, and helpful empty states.
+
+All navigation, buttons, interactive elements, and submission controls must function as intended.
+
+## 4. Five Core Learning Modules
+
+### Module 1: Descriptive Analytics
+
+**Core question:** What happened, what is happening, and how can we summarize business performance?
+
+**Primary tools:** SQL, Microsoft Excel, and Power BI.
+
+Create a structured curriculum covering:
+
+**SQL**
+- SELECT, DISTINCT, WHERE, ORDER BY, and LIMIT.
+- COUNT, SUM, AVG, MIN, and MAX.
+- GROUP BY and HAVING.
+- CASE expressions.
+- NULL handling.
+- INNER, LEFT, RIGHT where supported, and FULL JOIN concepts.
+- Common table expressions.
+- Subqueries.
+- Date and text functions.
+- Window functions.
+- Ranking, running totals, and period comparisons.
+- KPI calculations and business reporting.
+- Query readability and performance fundamentals.
+
+**Excel**
+- Formulas and cell references.
+- Relative and absolute references.
+- IF, IFS, SUMIF, SUMIFS, COUNTIF, COUNTIFS, and lookup functions.
+- XLOOKUP and equivalent approaches.
+- Text and date functions.
+- Data cleaning and validation.
+- Sorting, filtering, conditional formatting, and tables.
+- PivotTables and PivotCharts.
+- KPI calculations.
+- What-if analysis and scenario tables.
+- Building an analytical spreadsheet that another person can audit.
+
+**Power BI**
+- Data import and transformation concepts.
+- Data modeling and relationships.
+- Star schemas and fact/dimension tables.
+- Power Query fundamentals.
+- Basic DAX measures and calculated columns.
+- Measures for revenue, profit, growth, and year-to-date metrics.
+- Slicers, filters, drill-downs, and cross-filtering.
+- Dashboard layout and KPI reporting.
+- Data refresh and basic performance principles.
+
+Power BI assignments must include realistic tasks that can be completed in Power BI Desktop, with clear instructions and expected outputs. Where native software is unavailable, provide an equivalent simulation inside the app.
+
+**Practical project:** Analyze a fictional retail company's sales, products, regions, customers, costs, and margins. Produce a KPI report, SQL-based summaries, an Excel analysis workbook, and a Power BI dashboard specification.
+
+The learner must explain the business implications of the results, not merely calculate the numbers.
+
+### Module 2: Diagnostic Analytics
+
+**Core question:** Why did something happen, and what evidence supports the explanation?
+
+**Primary tools:** Python, R, and SQL.
+
+Cover:
+
+- Data quality checks and exploratory data analysis.
+- Missing values, duplicates, outliers, and inconsistent records.
+- Segmentation and subgroup comparisons.
+- Root-cause analysis.
+- Funnel analysis and customer journey investigation.
+- Cohort and retention analysis.
+- Correlation and covariance.
+- Confounding variables and Simpson's paradox.
+- Hypothesis testing and p-values.
+- Confidence intervals and practical significance.
+- A/B testing fundamentals.
+- Statistical assumptions and their limitations.
+- Anomaly detection.
+- Interpreting results without confusing correlation with causation.
+- Communicating evidence, limitations, and alternative explanations.
+
+**Python practice:** pandas, NumPy, Matplotlib, SciPy, and statsmodels.
+
+**R practice:** vectors, data frames, dplyr, ggplot2, grouping, summary statistics, visual exploration, and basic statistical testing.
+
+**SQL practice:** joining multiple tables, comparing segments, cohort queries, window functions, and tracing changes in business KPIs.
+
+**Practical project:** Investigate why customer retention has fallen. Compare customer segments, acquisition channels, product categories, and customer cohorts. Require the learner to distinguish supported conclusions from hypotheses that need further investigation.
+
+### Module 3: Predictive Analytics
+
+**Core question:** What is likely to happen next, and how reliable is that prediction?
+
+**Primary tools:** Python and R.
+
+Cover:
+
+- Prediction versus inference.
+- Defining prediction targets.
+- Regression and classification.
+- Exploratory analysis for modeling.
+- Feature engineering.
+- Train, validation, and test splits.
+- Data leakage and temporal leakage.
+- Baseline models.
+- Linear and logistic regression.
+- Decision trees and random forests.
+- Model pipelines and preprocessing.
+- Cross-validation.
+- Hyperparameter tuning.
+- Overfitting and underfitting.
+- Classification thresholds.
+- Class imbalance.
+- Confusion matrices, precision, recall, F1, ROC-AUC, and PR-AUC.
+- Regression metrics including MAE, RMSE, and R-squared.
+- Time-series forecasting fundamentals.
+- Model interpretation and feature importance.
+- Prediction uncertainty and limitations.
+- Model drift, monitoring, and responsible use.
+
+Teach learners why the correct metric depends on the business problem.
+
+Do not reward a model simply for achieving a high score. Require the learner to establish a baseline, avoid leakage, justify evaluation metrics, interpret errors, and assess whether the model is useful in practice.
+
+**Practical project:** Predict customer churn or future sales using a reproducible workflow. Compare at least two approaches and justify the final model using appropriate evaluation criteria.
+
+Provide working Python code and R equivalents where feasible. R lessons should use clearly explained packages and avoid assuming Python and R have identical syntax or behavior.
+
+### Module 4: Prescriptive Analytics
+
+**Core question:** What should we do, given the evidence, constraints, risks, and available resources?
+
+**Primary tools:** Python and R.
+
+Cover:
+
+- Decision variables.
+- Objective functions.
+- Constraints and feasible solutions.
+- Linear programming.
+- Resource allocation.
+- Capacity planning.
+- Product mix optimization.
+- Pricing and discount scenarios.
+- Inventory and reorder decisions.
+- Scheduling and assignment problems.
+- Cost-benefit analysis.
+- Simulation and Monte Carlo methods.
+- Sensitivity analysis.
+- Scenario comparison.
+- Trade-offs among profit, cost, service quality, and risk.
+- Translating mathematical results into actionable recommendations.
+
+Use Python libraries such as SciPy and, where appropriate, an optional optimization library. Provide equivalent R approaches when practical.
+
+**Practical project:** Allocate a limited marketing budget across several channels to maximize expected profit subject to budget and operational constraints. Include scenario analysis and sensitivity testing.
+
+The learner must explain the recommended decision, the assumptions behind it, the constraints that affect it, and the conditions under which the recommendation would change.
+
+### Module 5: Data Visualization and Communication
+
+**Core question:** How can data be communicated clearly, accurately, and persuasively?
+
+**Primary tools:** Tableau, Matplotlib, and Looker Studio (formerly Google Data Studio).
+
+Also include visualization principles relevant to Power BI and Excel.
+
+Cover:
+
+- Selecting the right chart for the analytical question.
+- Tables, bar charts, line charts, scatterplots, histograms, boxplots, heatmaps, and maps.
+- Distributions, relationships, comparisons, and trends.
+- Univariate, bivariate, and multivariate analysis.
+- Color, contrast, hierarchy, typography, and whitespace.
+- Axes, scales, labels, annotations, legends, and units.
+- Accessibility and color-vision considerations.
+- Dashboard design and layout.
+- Interactive filters and drill-downs.
+- Reducing clutter and cognitive load.
+- Avoiding misleading visualizations.
+- Communicating uncertainty and limitations.
+- Executive summaries and data storytelling.
+- Choosing charts based on audience and decision context.
+
+**Matplotlib exercises:** Require learners to write and modify actual Python visualization code, execute it, and inspect the resulting charts.
+
+**Tableau exercises:** Provide realistic workbook tasks, field assignments, calculated-field challenges, dashboard design requirements, and instructions for importing data and creating visualizations in Tableau.
+
+**Looker Studio exercises:** Provide instructions for preparing and importing CSV or spreadsheet data, configuring dimensions and metrics, creating charts, applying filters, and assembling interactive reports.
+
+**Practical project:** Build a visualization portfolio that answers five business questions using appropriate chart types. Include a dashboard critique exercise in which the learner identifies misleading elements and proposes specific improvements.
+
+Where the native desktop or cloud product is not available, provide an interactive simulation or guided assignment rather than pretending to execute the real product.
+
+## 5. A Unified Learning Experience
+
+Each module must support four levels:
+
+1. **Beginner:** Learn terminology, concepts, and fundamentals.
+2. **Intermediate:** Apply methods to realistic datasets.
+3. **Advanced:** Solve multi-step analytical problems.
+4. **Professional:** Complete open-ended projects and defend analytical decisions.
+
+Each lesson should follow this structure:
+
+1. Learning objectives.
+2. Short conceptual explanation.
+3. Business context and real-world example.
+4. Worked solution with explanations.
+5. Interactive knowledge check.
+6. Guided practical exercise.
+7. Independent challenge.
+8. Feedback and explanation.
+9. Summary and key takeaways.
+10. Suggested revision or next lesson.
+
+Avoid unnecessarily long lectures. Prioritize practical work, examples, and clear explanations of why each technique is useful.
+
+Teach the learner to think like an analyst: define the business question, inspect the data, select an appropriate method, validate the result, interpret the evidence, and communicate the recommendation.
+
+## 6. Assessment System: Multiple Choice and Open-Ended Work
+
+The application must support two complementary assessment types.
+
+### A. Multiple-Choice Questions
+
+Create a substantial question bank with questions tagged by:
+
+- Learning module.
+- Topic.
+- Tool.
+- Difficulty.
+- Competency.
+- Question type.
+- Correct answer and explanation.
+
+Each question should have four answer choices where appropriate, one best answer unless explicitly marked as multi-select, and plausible distractors based on common mistakes.
+
+Support:
+
+- Randomized question order.
+- Randomized answer order when appropriate.
+- Immediate or end-of-test feedback.
+- Explanations of why the correct answer is right.
+- Explanations of why the distractors are wrong.
+- Topic-specific results.
+- Question review.
+- Retry with a new set of questions.
+- Timed tests as an optional setting.
+- Exam mode with feedback withheld until submission.
+
+Do not use trivial questions exclusively. Test the learner's ability to interpret results, identify analytical errors, select appropriate methods, recognize limitations, and make decisions.
+
+### B. Open-Ended Coding Challenges
+
+Provide a coding editor or suitable multiline code input for practical programming tasks.
+
+Required capabilities:
+
+- Write code from scratch.
+- Edit starter code.
+- Execute supported exercises.
+- View results, error messages, and relevant output.
+- Submit solutions.
+- Receive automated feedback.
+- Reveal hints progressively.
+- Compare submitted code with a worked solution after an attempt.
+- Retry challenges.
+- Track attempts and improvement.
+
+Support Python and SQL code execution directly. Support R execution when the local R runtime is available.
+
+For each coding exercise, provide:
+
+- A business question.
+- A dataset and schema.
+- Clear requirements.
+- Expected output structure.
+- Sample input and output where helpful.
+- Hidden or visible automated test cases.
+- A scoring rubric.
+- Hints and progressive assistance.
+- A reference solution with an explanation.
+
+Evaluate solutions using appropriate checks, not simple string matching. For example, SQL answers should be assessed against the returned dataset, while Python answers should be evaluated using assertions, output checks, and task-specific criteria.
+
+Where multiple valid approaches exist, allow equivalent solutions.
+
+Feedback should identify the specific error, explain why it matters, and suggest the next step rather than merely displaying “Wrong answer.”
+
+**Execution safety:** Run submitted code outside the main Streamlit process, impose execution timeouts, use temporary working directories, and avoid exposing secrets or sensitive files. Provide an optional Docker-based execution environment for stronger isolation. Do not describe a basic subprocess or restricted `exec()` implementation as a secure sandbox against malicious code. Make the local, single-user trust assumptions explicit.
+
+### C. Business Case Assessments
+
+In addition to quizzes and code execution, create scenario-based tasks such as:
+
+- Explain a sudden decline in revenue.
+- Determine why customer churn increased.
+- Select and evaluate a predictive model.
+- Recommend a budget allocation.
+- Critique a misleading chart.
+- Recommend KPIs for a management dashboard.
+
+Assess answers using transparent rubrics that consider methodological correctness, evidence, reasoning, communication, and business relevance.
+
+For free-text answers, use transparent rubric-based scoring or self-assessment when no external grading service is configured. Never claim that subjective free-text responses are objectively graded unless a suitable evaluation method is actually implemented.
+
+## 7. Dataset Library and Analytical Environments
+
+Include several reproducible, fictional datasets that are suitable for realistic analytical practice.
+
+At minimum, create:
+
+**Retail dataset**
+- Customers.
+- Orders.
+- Order items.
+- Products.
+- Product categories.
+- Marketing channels.
+- Returns and discounts.
+
+**Subscription dataset**
+- Customer subscriptions.
+- Signup and cancellation dates.
+- Monthly revenue.
+- Product usage.
+- Customer support interactions.
+- Acquisition source.
+
+**Operations dataset**
+- Inventory.
+- Suppliers.
+- Delivery times.
+- Product demand.
+- Operating costs.
+- Resource capacity.
+
+Include at least one time-series dataset and one dataset designed for classification or regression.
+
+For each dataset, provide:
+
+- A data dictionary.
+- Meaningful column names and data types.
+- Relationships between tables where applicable.
+- A business context.
+- Known analytical pitfalls.
+- Suggested questions.
+- A generation script or documented reproducible source.
+
+Generate the datasets locally using seeded random number generators. Avoid real personal data.
+
+Provide a dataset explorer showing column names, data types, sample records, missing values, descriptive statistics, and basic charts.
+
+Allow users to import their own CSV and Excel files with validation, helpful error messages, and clear handling of missing or invalid values.
+
+Let learners run SQL queries against the provided databases and inspect tables and schemas.
+
+## 8. Automatic Evaluation and Competency Tracking
+
+Create a transparent competency model for every major skill.
+
+Track:
+
+- Knowledge accuracy.
+- Code execution success.
+- Coding challenge completion.
+- Test results.
+- Business case performance.
+- Repeated mistakes.
+- Improvement over time.
+- Mastery by topic.
+
+Use a configurable mastery threshold, such as 80%, while requiring additional practical evidence for selected advanced competencies.
+
+Do not equate quiz scores alone with professional competence. A user should demonstrate practical ability through coding, interpretation, and project work.
+
+Implement a simple adaptive learning system:
+
+- Recommend beginner material when foundational knowledge is weak.
+- Recommend targeted revision after repeated errors.
+- Increase difficulty after consistent success.
+- Reintroduce previously missed concepts.
+- Recommend a capstone when relevant prerequisites are completed.
+- Let the learner override recommendations and select any available lesson.
+
+Explain recommendations in plain language.
+
+Persist learning progress, assessment attempts, and settings in a local SQLite database. Provide options to export results and reset local progress.
+
+## 9. Capstone Projects
+
+Include at least five substantial capstone projects, each integrating multiple skills.
+
+**Project 1: Retail Performance Intelligence**
+
+Combine SQL, Excel, descriptive statistics, and dashboard requirements to investigate business performance.
+
+**Project 2: Customer Retention Investigation**
+
+Use Python or R, SQL, segmentation, cohort analysis, and statistical reasoning to investigate customer churn.
+
+**Project 3: Sales Forecasting**
+
+Build and evaluate forecasting or regression models, compare a baseline with an improved approach, and explain uncertainty.
+
+**Project 4: Resource Allocation Optimization**
+
+Define an objective function and constraints, implement an optimization model, evaluate alternative scenarios, and justify the recommendation.
+
+**Project 5: Executive Analytics Portfolio**
+
+Prepare a complete analysis from a business question through data preparation, analysis, visualization, and final recommendations.
+
+Each capstone must contain a dataset, requirements, milestones, automated checks where feasible, evaluation criteria, and an example of a strong final submission.
+
+Include a final competency assessment that samples skills across all five modules.
+
+## 10. Professional Analytical Standards
+
+Embed professional practice throughout the application.
+
+Teach users to:
+
+- Ask precise and measurable business questions.
+- Distinguish metrics, dimensions, assumptions, and constraints.
+- Validate data before analysis.
+- Document transformations and calculations.
+- Use reproducible code.
+- Validate analytical outputs against simple baselines or independent checks.
+- Avoid data leakage and inappropriate statistical conclusions.
+- Select appropriate performance metrics.
+- Explain uncertainty and limitations.
+- Distinguish statistical significance from business significance.
+- Recognize bias and data quality issues.
+- Create readable, maintainable code.
+- Produce understandable visualizations.
+- Communicate findings to technical and nontechnical audiences.
+
+Include examples of common mistakes and exercises requiring users to diagnose and correct them.
+
+## 11. User Experience and Accessibility
+
+The application should feel like an interactive professional learning platform rather than a raw programming environment.
+
+Include:
+
+- A landing page with a clear learning path.
+- Search and filtering across courses and exercises.
+- Progress indicators.
+- Clear code and output areas.
+- Tabular data previews.
+- Readable visualizations.
+- Helpful error messages.
+- Keyboard-friendly interactions where supported.
+- Accessible labels and appropriate color contrast.
+- Dark and light themes if practical.
+- A beginner-friendly glossary.
+- Tool-specific cheat sheets.
+- A searchable reference library.
+- Downloadable exercise datasets and project briefs.
+- A solution-reveal mechanism that encourages an attempt before showing the answer.
+
+Keep the interface responsive and the code modular. Avoid unnecessary animations, decorative complexity, and excessive dependencies.
+
+## 12. Software Engineering Requirements
+
+Implement the application as maintainable software with separated modules for:
+
+- User interface.
+- Curriculum and lesson content.
+- Dataset generation and management.
+- SQL execution.
+- Python code execution.
+- Optional R execution.
+- Exercise validation and scoring.
+- Progress persistence.
+- Visualization helpers.
+- Assessment logic.
+- Configuration and error handling.
+
+Use clear function names, type hints where appropriate, meaningful comments, and reusable components.
+
+Avoid putting the entire application into one oversized Python file.
+
+Handle missing dependencies, invalid user input, empty datasets, corrupted uploads, execution timeouts, and database errors gracefully.
+
+Never hard-code assessment answers into visible client-side elements when an assessment is intended to have hidden test cases.
+
+Do not require network access for ordinary learning activities. Clearly distinguish optional external-tool assignments from functionality that works locally.
+
+## 13. Required Deliverables
+
+Create a complete runnable project with, at minimum:
+
+- `app.py` — application entry point.
+- `requirements.txt` — required Python packages.
+- A modular application package containing the core functionality.
+- A curriculum directory with lesson content.
+- A datasets directory or reproducible dataset-generation scripts.
+- A local database initialization mechanism.
+- A code-execution module.
+- An exercise and assessment module.
+- A progress-tracking module.
+- A `tests/` directory containing automated tests.
+- `README.md` with setup, launch, usage, troubleshooting, and reset instructions.
+- An example environment or configuration file where necessary.
+
+Use an appropriate project structure and create every required file.
+
+**Do not stop at an architecture proposal, pseudocode, a mockup, or an incomplete scaffold. Implement the working application.** Do not leave core functionality as TODO comments or nonfunctional placeholder buttons.
+
+If you cannot create files directly in the available environment, provide the complete contents of every required file with explicit file paths and instructions for saving them.
+
+## 14. Testing and Quality Assurance
+
+Before declaring the project complete:
+
+1. Install or validate the required dependencies where the execution environment allows.
+2. Run automated tests.
+3. Test application startup.
+4. Test dataset generation and database initialization.
+5. Verify that SQL queries execute against the intended database.
+6. Verify that coding exercises return correct results and handle failures.
+7. Verify scoring for multiple-choice and open-ended tasks.
+8. Verify progress persistence across application restarts.
+9. Test invalid inputs, empty data, and timeouts.
+10. Fix detected problems before delivery.
+
+For features that depend on unavailable desktop software, document the limitation and validate the locally implemented simulation.
+
+Do not claim that tests have passed unless they have actually been run.
+
+## 15. Definition of Done
+
+The project is complete only when all the following conditions are satisfied:
+
+- It starts locally using documented commands.
+- The five learning modules contain structured lessons and practical exercises.
+- Multiple-choice assessments are functional and provide explanations.
+- Python and SQL coding challenges are executable and automatically assessed.
+- R coding activities are supported when R is installed.
+- Learners can practise Excel, Power BI, Tableau, and Looker Studio through practical exercises and guided workflows.
+- The platform contains realistic datasets and data dictionaries.
+- Users can complete end-to-end analytical capstones.
+- Progress is stored locally and displayed correctly.
+- The application provides meaningful feedback and revision recommendations.
+- Core features work without cloud services or paid API keys.
+- Setup instructions are complete, and limitations are accurately documented.
+- Automated tests exist for critical functionality.
+- The application includes no fake integrations, misleading feature claims, or unfinished core features.
+
+## 16. How You Should Execute This Task
+
+Work systematically.
+
+**Phase 1:** Define the architecture, project structure, dependencies, curriculum model, and execution-safety approach.
+
+**Phase 2:** Implement the runnable application shell, navigation, local persistence, dataset library, and dashboard.
+
+**Phase 3:** Implement the five learning tracks and their lesson content.
+
+**Phase 4:** Implement interactive quizzes, coding challenges, SQL execution, automated assessment, and the optional R integration.
+
+**Phase 5:** Implement practical tool simulations, visualizations, capstone projects, competency tracking, and adaptive recommendations.
+
+**Phase 6:** Run tests, correct errors, verify setup instructions, and review the entire application against the definition of done.
+
+Deliver the working project and clear launch instructions. Make sensible engineering decisions without unnecessarily asking for permission. If a feature cannot be fully implemented because of a genuine technical limitation, provide the strongest functional alternative and document that limitation honestly.
+
+**Final guiding principle:** Build a learning system that trains users to solve analytical problems independently, not merely to memorize terminology or copy code. Every important concept should lead to a practical task, every task should produce meaningful feedback, and every assessment should contribute to measurable competence.

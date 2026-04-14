@@ -1,0 +1,1 @@
+in script: app.py change these 2 things: 1. translate and ad there an option for learning the content in czech language, 2.add there an option for dark theme.

@@ -1,0 +1,13 @@
+# Optional isolated runner image for learner code (Settings -> Execution backend -> docker).
+# Build from the project root:
+#   docker build -f docker/Dockerfile.runner -t analytics-lab-runner:latest .
+FROM python:3.12-slim
+
+RUN pip install --no-cache-dir pandas numpy duckdb scipy statsmodels scikit-learn matplotlib openpyxl \
+    && useradd --create-home --uid 10001 learner
+
+USER learner
+WORKDIR /work
+ENV MPLBACKEND=Agg PYTHONDONTWRITEBYTECODE=1
+# The application mounts the run directory at /work and the data directory read-only at /labdata,
+# and starts containers with --network none, --read-only, memory/CPU/pids limits.
