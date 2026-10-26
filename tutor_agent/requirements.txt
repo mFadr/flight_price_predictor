@@ -1,0 +1,16 @@
+# Personal AI Tutor - runtime dependencies (Python 3.12 or 3.13, Windows 10/11)
+PySide6>=6.7          # desktop UI
+pydantic>=2.7         # data models and LLM output validation
+httpx>=0.27           # Ollama + OpenAI-compatible HTTP clients (streaming, timeouts)
+sympy>=1.13           # symbolic verification, units, safe plotting
+numpy>=1.26           # numeric computation for plots
+matplotlib>=3.8       # charts, diagrams, LaTeX (mathtext) rendering
+markdown>=3.6         # message rendering
+pygments>=2.17        # code syntax highlighting
+keyring>=25           # API keys in Windows Credential Manager
+pymupdf>=1.24         # local PDF text extraction (optional OCR via Tesseract)
+tomli-w>=1.0          # writing the TOML config
+
+# development / tests
+pytest>=8
+pytest-qt>=4.4

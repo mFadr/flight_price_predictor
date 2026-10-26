@@ -1,0 +1,49 @@
+# Example configuration - the app writes its real config to
+#   %LOCALAPPDATA%\PersonalAITutor\config.toml
+# (override the data folder with the TUTOR_DATA_DIR environment variable).
+# Everything here can be changed in the app under Settings.
+# API KEYS NEVER GO IN THIS FILE: they are stored in Windows Credential Manager
+# (Settings -> Cloud -> API key) or read from the env var named in cloud.api_key_env.
+
+mode = "local"              # local | hybrid | cloud
+code_timeout_s = 5.0        # sandbox time limit for code exercises
+code_memory_mb = 256        # sandbox memory limit (Windows Job Object)
+context_char_budget = 12000 # older conversation beyond this is summarised
+ui_font_size = 11
+high_contrast = false
+
+[ollama]
+base_url = "http://localhost:11434"
+model = "llama3.1:8b"       # any installed model, e.g. "llama3.2:3b", "qwen2.5:7b"
+timeout_s = 300.0           # CPU-only laptops can need minutes for long prompts
+num_ctx = 8192
+
+[cloud]
+enabled = false
+provider_name = "OpenAI-compatible"
+base_url = "https://api.openai.com/v1"
+model = "gpt-4o-mini"       # any model id offered by the endpoint
+timeout_s = 90.0
+api_key_env = "TUTOR_CLOUD_API_KEY"
+structured_output = "json_schema"  # json_schema | json_object | prompt
+max_requests_per_day = 200
+max_output_tokens = 1500
+consent_given = false       # set by the app after you confirm the data-transmission notice
+
+[generation]
+temperature = 0.4
+top_p = 0.9
+max_response_tokens = 900
+quality = "balanced"        # fast | balanced | quality
+response_length = "medium"  # short | medium | long
+
+[fallback]
+fallback_to_local = true    # cloud failure -> local model (data stays local)
+fallback_to_cloud = false   # local failure -> cloud (hybrid only, always announced)
+
+[hybrid]
+cloud_tasks = ["explain"]   # explain | exercise | evaluate | summary
+
+[privacy]
+diagnostic_logging = false
+send_learning_history_to_cloud = false
